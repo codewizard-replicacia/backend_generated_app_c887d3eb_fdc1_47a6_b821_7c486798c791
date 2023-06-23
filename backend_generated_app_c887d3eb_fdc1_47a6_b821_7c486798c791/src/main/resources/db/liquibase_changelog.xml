@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <property name="schemaName" value="generated_app"></property>
+    <property name="author=" value="db-designer"></property>
+    <changeSet id="v1-01-01" author="${author}">
+    
+ <createTable schemaName="${schemaName}" tableName="Departments">
+    <column name="DepartmentID" type="VARCHAR(250)" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="DepartmentName" type="VARCHAR(250)" />
+    
+     <column name="HOD" type="VARCHAR(250)" />
+    
+     <column name="DepartmentSize" type="SERIAL" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Students">
+	<column name="StudentID" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="StudentName" type="VARCHAR(250)" />
+    
+     <column name="StudentAddress" type="VARCHAR(250)" />
+    
+     <column name="ParentNames" type="VARCHAR(250)" />
+    
+     <column name="PhoneNumber" type="BIGINT" />
+    
+     <column name="State" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Lecturers">
+    <column name="StaffID" type="VARCHAR(250)" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="StaffName" type="VARCHAR(250)" />
+    
+     <column name="PhoneNumber" type="BIGINT" />
+    
+     <column name="Address" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="College">
+	<column name="CollegeID" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="CollegeName" type="VARCHAR(250)" />
+    
+     <column name="CollegePhNum" type="BIGINT" />
+    
+     <column name="CollegeAddress" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Courses">
+    <column name="CourseID" type="VARCHAR(250)" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="CourseName" type="VARCHAR(250)" />
+    
+     <column name="CourseDuration" type="SERIAL" />
+    
+     <column name="NoOfStudentEnrolled" type="SERIAL" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="PreviousEducation">
+    <column name="EducationName" type="VARCHAR(250)" />
+    
+     <column name="FromYear" type="TIMESTAMP" />
+    
+     <column name="ToYear" type="TIMESTAMP" />
+    
+     <column name="BoardName" type="VARCHAR(250)" />
+    
+ 	<column name="EducationID" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Subjects">
+	<column name="SubjectID" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Subject1Name" type="VARCHAR(250)" />
+    
+     <column name="Subject2Name" type="VARCHAR(250)" />
+    
+     <column name="Subject3Name" type="VARCHAR(250)" />
+    
+     <column name="Subject4Name" type="VARCHAR(250)" />
+    
+     <column name="Subject5Name" type="VARCHAR(250)" />
+    
+     <column name="Subject6Name" type="VARCHAR(250)" />
+    
+     <column name="Lab1" type="VARCHAR(250)" />
+    
+     <column name="Lab2" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+	
+  <createTable schemaName="${schemaName}" tableName="CollegeAdmissioned">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="CollegeID" type="SERIAL" />
+	<column name="StudentID" type="SERIAL" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="CollegeCollegeStaff">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="CollegeID" type="SERIAL" />
+	<column name="DepartmentID" type="VARCHAR(250)" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="CoursesContains">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="CourseID" type="VARCHAR(250)" />
+	<column name="SubjectID" type="SERIAL" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="LecturersTeaches">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="StaffID" type="VARCHAR(250)" />
+	<column name="SubjectID" type="SERIAL" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="CollegeCoursesOffered">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="CollegeID" type="SERIAL" />
+	<column name="CourseID" type="VARCHAR(250)" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="DepartmentsHas">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DepartmentID" type="VARCHAR(250)" />
+	<column name="StaffID" type="VARCHAR(250)" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="StudentsEducationDetails">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="StudentID" type="SERIAL" />
+	<column name="EducationID" type="SERIAL" />
+</createTable>
+
+ 	<addForeignKeyConstraint baseTableName="CollegeAdmissioned" baseTableSchemaName="${schemaName}"  baseColumnNames="CollegeID" constraintName="Students_CollegeID_fk"
+	                                  referencedTableName="College" referencedTableSchemaName="${schemaName}" referencedColumnNames="CollegeID"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="CollegeAdmissioned" baseTableSchemaName="${schemaName}"  baseColumnNames="StudentID" constraintName="Students_StudentID_fk"
+	                                  referencedTableName="Students" referencedTableSchemaName="${schemaName}" referencedColumnNames="StudentID"/>
+ 
+ 	<addForeignKeyConstraint baseTableName="CollegeCollegeStaff" baseTableSchemaName="${schemaName}"  baseColumnNames="CollegeID" constraintName="Departments_CollegeID_fk"
+	                                  referencedTableName="College" referencedTableSchemaName="${schemaName}" referencedColumnNames="CollegeID"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="CollegeCollegeStaff" baseTableSchemaName="${schemaName}"  baseColumnNames="DepartmentID" constraintName="Departments_DepartmentID_fk"
+	                                  referencedTableName="Departments" referencedTableSchemaName="${schemaName}" referencedColumnNames="DepartmentID"/>
+ 
+ 	<addForeignKeyConstraint baseTableName="CoursesContains" baseTableSchemaName="${schemaName}"  baseColumnNames="CourseID" constraintName="Subjects_CourseID_fk"
+	                                  referencedTableName="Courses" referencedTableSchemaName="${schemaName}" referencedColumnNames="CourseID"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="CoursesContains" baseTableSchemaName="${schemaName}"  baseColumnNames="SubjectID" constraintName="Subjects_SubjectID_fk"
+	                                  referencedTableName="Subjects" referencedTableSchemaName="${schemaName}" referencedColumnNames="SubjectID"/>
+ 
+ 	<addForeignKeyConstraint baseTableName="LecturersTeaches" baseTableSchemaName="${schemaName}"  baseColumnNames="StaffID" constraintName="Subjects_StaffID_fk"
+	                                  referencedTableName="Lecturers" referencedTableSchemaName="${schemaName}" referencedColumnNames="StaffID"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="LecturersTeaches" baseTableSchemaName="${schemaName}"  baseColumnNames="SubjectID" constraintName="Subjects_SubjectID_fk"
+	                                  referencedTableName="Subjects" referencedTableSchemaName="${schemaName}" referencedColumnNames="SubjectID"/>
+ 
+ 	<addForeignKeyConstraint baseTableName="CollegeCoursesOffered" baseTableSchemaName="${schemaName}"  baseColumnNames="CollegeID" constraintName="Courses_CollegeID_fk"
+	                                  referencedTableName="College" referencedTableSchemaName="${schemaName}" referencedColumnNames="CollegeID"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="CollegeCoursesOffered" baseTableSchemaName="${schemaName}"  baseColumnNames="CourseID" constraintName="Courses_CourseID_fk"
+	                                  referencedTableName="Courses" referencedTableSchemaName="${schemaName}" referencedColumnNames="CourseID"/>
+ 
+ 	<addForeignKeyConstraint baseTableName="DepartmentsHas" baseTableSchemaName="${schemaName}"  baseColumnNames="DepartmentID" constraintName="Lecturers_DepartmentID_fk"
+	                                  referencedTableName="Departments" referencedTableSchemaName="${schemaName}" referencedColumnNames="DepartmentID"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="DepartmentsHas" baseTableSchemaName="${schemaName}"  baseColumnNames="StaffID" constraintName="Lecturers_StaffID_fk"
+	                                  referencedTableName="Lecturers" referencedTableSchemaName="${schemaName}" referencedColumnNames="StaffID"/>
+ 
+ 	<addForeignKeyConstraint baseTableName="StudentsEducationDetails" baseTableSchemaName="${schemaName}"  baseColumnNames="StudentID" constraintName="PreviousEducation_StudentID_fk"
+	                                  referencedTableName="Students" referencedTableSchemaName="${schemaName}" referencedColumnNames="StudentID"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="StudentsEducationDetails" baseTableSchemaName="${schemaName}"  baseColumnNames="EducationID" constraintName="PreviousEducation_EducationID_fk"
+	                                  referencedTableName="PreviousEducation" referencedTableSchemaName="${schemaName}" referencedColumnNames="EducationID"/>
+ 
+	
+ 	<addColumn tableName="Departments" schemaName="${schemaName}">
+	    <column name="DepartmentsBranchbelongsto" type="VARCHAR(250)"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Departments" baseColumnNames="DepartmentsBranchbelongsto" baseTableSchemaName="${schemaName}" constraintName="Departments_Branchbelongsto_fk" referencedTableName="Courses"
+	                                 referencedColumnNames="CourseID" referencedTableSchemaName="${schemaName}"/>
+ 
+
+ 	<addColumn tableName="Students" schemaName="${schemaName}">
+	    <column name="StudentsEnrolledWith" type="VARCHAR(250)"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Students" baseColumnNames="StudentsEnrolledWith" baseTableSchemaName="${schemaName}" constraintName="Students_EnrolledWith_fk" referencedTableName="Courses"
+	                                 referencedColumnNames="CourseID" referencedTableSchemaName="${schemaName}"/>
+ 
+
+ 
+ 
+ 
+ 
+ 
+	    </changeSet>
+</databaseChangeLog>

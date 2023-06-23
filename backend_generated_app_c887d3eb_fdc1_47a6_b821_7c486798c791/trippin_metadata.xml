@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Model">
+            <EntityType HasStream="false" Name="College">
+                <Key>
+                    <PropertyRef Name="CollegeID"/>
+                </Key>
+                <Property Name="CollegeID" Type="Edm.Int32"/>
+                <Property Name="CollegeName" Type="Edm.String"/>
+                <Property Name="CollegePhNum" Type="Edm.Int64"/>
+                <Property Name="CollegeAddress" Type="Edm.String"/>
+                <NavigationProperty Name="Admissioned" Type="Collection(Model.Students)"/>
+                <NavigationProperty Name="CoursesOffered" Type="Collection(Model.Courses)"/>
+                <NavigationProperty Name="CollegeStaff" Type="Collection(Model.Departments)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Subjects">
+                <Key>
+                    <PropertyRef Name="SubjectID"/>
+                </Key>
+                <Property Name="SubjectID" Type="Edm.Int32"/>
+                <Property Name="Subject1Name" Type="Edm.String"/>
+                <Property Name="Subject2Name" Type="Edm.String"/>
+                <Property Name="Subject3Name" Type="Edm.String"/>
+                <Property Name="Subject4Name" Type="Edm.String"/>
+                <Property Name="Subject5Name" Type="Edm.String"/>
+                <Property Name="Subject6Name" Type="Edm.String"/>
+                <Property Name="Lab1" Type="Edm.String"/>
+                <Property Name="Lab2" Type="Edm.String"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Departments">
+                <Key>
+                    <PropertyRef Name="DepartmentID"/>
+                </Key>
+                <Property Name="DepartmentID" Type="Edm.String"/>
+                <Property Name="DepartmentName" Type="Edm.String"/>
+                <Property Name="HOD" Type="Edm.String"/>
+                <Property Name="DepartmentSize" Type="Edm.Int32"/>
+                <NavigationProperty Name="Has" Type="Collection(Model.Lecturers)"/>
+                <NavigationProperty Name="Branchbelongsto" Type="Model.Courses"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="PreviousEducation">
+                <Key>
+                    <PropertyRef Name="EducationID"/>
+                </Key>
+                <Property Name="EducationName" Type="Edm.String"/>
+                <Property Name="FromYear" Type="Edm.DateTimeOffset"/>
+                <Property Name="ToYear" Type="Edm.DateTimeOffset"/>
+                <Property Name="BoardName" Type="Edm.String"/>
+                <Property Name="EducationID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Students">
+                <Key>
+                    <PropertyRef Name="StudentID"/>
+                </Key>
+                <Property Name="StudentID" Type="Edm.Int32"/>
+                <Property Name="StudentName" Type="Edm.String"/>
+                <Property Name="StudentAddress" Type="Edm.String"/>
+                <Property Name="ParentNames" Type="Edm.String"/>
+                <Property Name="PhoneNumber" Type="Edm.Int64"/>
+                <Property Name="State" Type="Edm.String"/>
+                <NavigationProperty Name="EnrolledWith" Type="Model.Courses"/>
+                <NavigationProperty Name="EducationDetails" Type="Collection(Model.PreviousEducation)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Courses">
+                <Key>
+                    <PropertyRef Name="CourseID"/>
+                </Key>
+                <Property Name="CourseID" Type="Edm.String"/>
+                <Property Name="CourseName" Type="Edm.String"/>
+                <Property Name="CourseDuration" Type="Edm.Int32"/>
+                <Property Name="NoOfStudentEnrolled" Type="Edm.Int32"/>
+                <NavigationProperty Name="Contains" Type="Collection(Model.Subjects)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Lecturers">
+                <Key>
+                    <PropertyRef Name="StaffID"/>
+                </Key>
+                <Property Name="StaffID" Type="Edm.String"/>
+                <Property Name="StaffName" Type="Edm.String"/>
+                <Property Name="PhoneNumber" Type="Edm.Int64"/>
+                <Property Name="Address" Type="Edm.String"/>
+                <NavigationProperty Name="Teaches" Type="Collection(Model.Subjects)"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="Colleges" EntityType="Model.College">
+                    <NavigationPropertyBinding Path="Admissioned" Target="Students"/>
+                    <NavigationPropertyBinding Path="CoursesOffered" Target="Courses"/>
+                    <NavigationPropertyBinding Path="CollegeStaff" Target="Departments"/>
+                </EntitySet>
+                <EntitySet Name="Subjects" EntityType="Model.Subjects"/>
+                <EntitySet Name="Departments" EntityType="Model.Departments">
+                    <NavigationPropertyBinding Path="Has" Target="Lecturers"/>
+                    <NavigationPropertyBinding Path="Branchbelongsto" Target="Courses"/>
+                </EntitySet>
+                <EntitySet Name="PreviousEducations" EntityType="Model.PreviousEducation"/>
+                <EntitySet Name="Students" EntityType="Model.Students">
+                    <NavigationPropertyBinding Path="EnrolledWith" Target="Courses"/>
+                    <NavigationPropertyBinding Path="EducationDetails" Target="PreviousEducations"/>
+                </EntitySet>
+                <EntitySet Name="Courses" EntityType="Model.Courses">
+                    <NavigationPropertyBinding Path="Contains" Target="Subjects"/>
+                </EntitySet>
+                <EntitySet Name="Lecturers" EntityType="Model.Lecturers">
+                    <NavigationPropertyBinding Path="Teaches" Target="Subjects"/>
+                </EntitySet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
